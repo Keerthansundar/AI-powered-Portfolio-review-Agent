@@ -2,7 +2,7 @@
 
 An AI-powered portfolio review assistant that analyzes client portfolio data, evaluates portfolio risk alignment, and generates an advisor-friendly portfolio review using deterministic Python tools and a local LLM.
 
-> **Prototype for the Mili FDE Take-Home Assignment**
+
 >
 > ⚠️ This project is an advisor-support prototype and does not provide automated financial advice or execute trades.
 
