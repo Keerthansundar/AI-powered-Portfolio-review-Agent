@@ -1,0 +1,6 @@
+ticker,asset_name,asset_class,sector,allocation_pct,expense_ratio_pct
+AAPL,Apple Inc,Equity,Technology,25,0
+MSFT,Microsoft Corp,Equity,Technology,20,0
+NVDA,NVIDIA Corp,Equity,Technology,15,0
+VOO,Vanguard S&P 500 ETF,Equity,Diversified,20,0.03
+BND,Vanguard Total Bond Market ETF,Fixed Income,Bonds,20,0.03
