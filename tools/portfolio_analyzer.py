@@ -130,20 +130,15 @@ def calculate_portfolio_analysis(portfolio_json: str) -> dict:
             total_allocation,
             2
         ),
-        "asset_class_allocation": (
-            asset_class_allocation
-        ),
-        "sector_allocation": (
-            sector_allocation
-        ),
+        "asset_class_allocation": asset_class_allocation,
+        "sector_allocation": sector_allocation,
         "top_holdings": top_holdings,
-        "concentration_risks": (
-            concentration_risks
-        ),
-        "weighted_expense_ratio_pct": round(
-            weighted_expense_ratio_pct,
-            4
-        ),
+        "concentration_risks": concentration_risks,
+        "weighted_expense_ratio": {
+            "value": round(weighted_expense_ratio_pct, 4),
+            "unit": "percent",
+            "display": f"{weighted_expense_ratio_pct:.4f}%"
+        },
     }
 
 
@@ -164,7 +159,7 @@ def analyze_portfolio(
 
         return json.dumps(
             result,
-            indent=2
+            separators=(",", ":")
         )
 
     except Exception as e:
@@ -173,5 +168,5 @@ def analyze_portfolio(
             {
                 "error": str(e)
             },
-            indent=2
+            separators=(",", ":")
         )

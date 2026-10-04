@@ -148,11 +148,13 @@ portfolio_records = portfolio_df.to_dict(
 )
 
 portfolio_json = json.dumps(
-    portfolio_records
+    portfolio_records,
+    separators=(",", ":")
 )
 
 client_json = json.dumps(
-    client_profile
+    client_profile,
+    separators=(",", ":")
 )
 
 
@@ -170,37 +172,37 @@ if st.button(
 ):
 
     agent_input = f"""
-CLIENT PROFILE:
+        CLIENT PROFILE:
+        {client_json}
 
-{client_json}
+        PORTFOLIO HOLDINGS:
+        {portfolio_json}
 
+        TASK:
+        Review this portfolio for the advisor.
 
-PORTFOLIO HOLDINGS:
+        Required sections:
+        1. Executive Summary
+        2. Asset Allocation
+        3. Key Concentration Risks
+        4. Expense Observation
+        5. Risk Alignment
+        6. 2-3 Potential Actions for Advisor Review
 
-{portfolio_json}
+        Use the deterministic analysis tools available to you.
 
-
-Please analyze this portfolio using your tools.
-
-Return an advisor-friendly portfolio review with:
-
-1. Executive summary
-2. Asset allocation
-3. Key concentration risks
-4. Expense observations
-5. Risk alignment
-6. Two or three potential actions for advisor review
-
-Do not execute or recommend automatic trades.
-"""
-
+        Do not calculate financial metrics yourself.
+        Do not modify numbers returned by tools.
+        Do not invent information.
+        Do not recommend automatic trades.
+        """
     with st.spinner(
         "Portfolio agent is analyzing the client..."
     ):
 
         try:
 
-            start_time = time.time()
+            total_start = time.perf_counter()
 
             result = asyncio.run(
                 Runner.run(
@@ -209,12 +211,15 @@ Do not execute or recommend automatic trades.
                 )
             )
 
-            elapsed = time.time() - start_time
+            total_elapsed = (
+                time.perf_counter() - total_start
+            )
 
             final_output = result.final_output
 
             st.info(
-                f"Agent execution time: {elapsed:.2f} seconds"
+                f"Agent execution time: "
+                f"{total_elapsed:.2f} seconds"
             )
 
         except Exception as e:
